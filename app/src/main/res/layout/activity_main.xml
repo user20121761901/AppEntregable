@@ -4,15 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/clr_bgApp"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:text="@string/txt_tvTitle"
+        android:textAllCaps="true"
+        android:textColor="@color/clr_textLabel"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvRazonS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRazonS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_tvRazonS"
+        android:textAllCaps="true"
+        android:textColor="@color/clr_textLabel"
+        app:layout_constraintBottom_toTopOf="@+id/etRazonS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <EditText
+        android:id="@+id/etRazonS"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:hint="@string/txt_etRazonS"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="@color/clr_textLabel"
+        android:textColorHint="@color/clr_textHint"
+        app:layout_constraintBottom_toTopOf="@id/tvRuc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRazonS" />
+
+    <TextView
+        android:id="@+id/tvRuc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_tvRuc"
+        android:textAllCaps="true"
+        android:textColor="@color/clr_textLabel"
+        app:layout_constraintBottom_toTopOf="@+id/etRuc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etRazonS" />
+
+    <EditText
+        android:id="@+id/etRuc"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:hint="@string/txt_etRuc"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/clr_white"
+        android:textColorHint="@color/clr_textHint"
+        app:layout_constraintBottom_toTopOf="@id/btnRegistrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRuc" />
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/clr_bgButton"
+        android:text="@string/txt_btnRegistrar"
+        android:textColor="@color/clr_textButton"
+        app:layout_constraintBottom_toTopOf="@id/rgPersona"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etRuc" />
+
+    <RadioGroup
+        android:id="@+id/rgPersona"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/btnListar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRegistrar">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_rbJuridica"
+            android:textColor="@color/clr_textHint"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_rbNaturales"
+            android:textColor="@color/clr_textHint"
+            android:textSize="15sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnListar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/clr_bgButton"
+        android:text="@string/txt_btnListar"
+        android:textColor="@color/clr_textButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgPersona" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
