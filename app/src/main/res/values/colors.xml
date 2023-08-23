@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="clr_black">#FF000000</color>
+    <color name="clr_white">#FFFFFFFF</color>
+    <color name="clr_bgApp">#011711</color>
+    <color name="clr_bgButton">#086853</color>
+    <color name="clr_textLabel">#31A58D</color>
+    <color name="clr_textButton">#C2FFF4</color>
+    <color name="clr_textHint">#70978F</color>
 </resources>
