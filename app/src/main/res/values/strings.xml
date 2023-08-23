@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AndroidJavaEntregable</string>
+    <string name="txt_tvTitle">Listar RUC personas\nnaturales y jurídicas</string>
+    <string name="txt_tvRazonS">Razón Social</string>
+    <string name="txt_tvRuc">Ingrese RUC</string>
+    <string name="txt_btnRegistrar">Registrar</string>
+    <string name="txt_btnListar">Listar</string>
+    <string name="txt_rbNaturales">Personas Naturales</string>
+    <string name="txt_rbJuridica">Personas Jurídicas</string>
+    <string name="txt_etRazonS">Escriba aquí razón social</string>
+    <string name="txt_etRuc">Escriba aquí RUC</string>
 </resources>
