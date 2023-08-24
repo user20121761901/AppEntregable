@@ -49,13 +49,13 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void cargarTabla() {
-        String acum = "";
+        String mensaje = "";
         try {
             lista = objEmpresa.ListadoGeneral();
             for (Empresa obj : lista) {
-                acum += obj.getRazonSocial() + " " + obj.getRuc() + "\n";
+                mensaje += obj.getRazonSocial() + " " + obj.getRuc() + "\n";
             }
-            Toast.makeText(getApplicationContext(), acum, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
         } catch (Exception e) {
         }
     }
@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements OnClickListener {
         if (btnRegistrar == view) {
             Grabar();
         }
-        if (btnRegistrar == view) {
+        if (btnListar == view) {
             cargarTabla();
         }
     }

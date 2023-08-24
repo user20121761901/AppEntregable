@@ -12,8 +12,8 @@ public class EmpresaDAO {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
 
-    public EmpresaDAO(Context contexto) {
-        dbHelper = new MySQLiteHelper(contexto);
+    public EmpresaDAO(Context context) {
+        dbHelper = new MySQLiteHelper(context);
     }
 
     public void open() throws SQLException {
@@ -55,7 +55,7 @@ public class EmpresaDAO {
             Empresa objEmpresa = new Empresa();
             objEmpresa.setId(c.getInt(0));
             objEmpresa.setRuc(c.getString(1));
-            objEmpresa.setRazonSocial(c.getString(3));
+            objEmpresa.setRazonSocial(c.getString(2));
             listado.add(objEmpresa);
         }
         c.close();
