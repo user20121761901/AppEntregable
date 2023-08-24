@@ -42,7 +42,7 @@
         android:hint="@string/txt_etRazonS"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="@color/clr_textLabel"
+        android:textColor="@color/clr_white"
         android:textColorHint="@color/clr_textHint"
         app:layout_constraintBottom_toTopOf="@id/tvRuc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,8 @@
         app:layout_constraintBottom_toTopOf="@id/btnRegistrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRuc" />
+        app:layout_constraintTop_toBottomOf="@id/tvRuc"
+        android:maxLength="11"/>
 
     <Button
         android:id="@+id/btnRegistrar"
