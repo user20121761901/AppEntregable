@@ -7,14 +7,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity implements OnClickListener {
+    private static final int rucJuridica=20;
+    private static final int rucNatural=10;
     private EmpresaDAO objEmpresa;
     EditText txtRazonSocial, txtRUC;
     Button btnRegistrar, btnListar;
+    RadioButton rbJuridica, rbNatural;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class MainActivity extends Activity implements OnClickListener {
         btnListar = (Button) findViewById(R.id.btnListar);
         btnRegistrar.setOnClickListener(this);
         btnListar.setOnClickListener(this);
+        rbJuridica = (RadioButton) findViewById(R.id.rbJuridica);
+        rbNatural = (RadioButton) findViewById(R.id.rbNatural);
     }
 
     @Override
@@ -41,7 +47,12 @@ public class MainActivity extends Activity implements OnClickListener {
             grabarEmpresa();
         }
         if (btnListar == view) {
-            cargarTabla();
+            if (rbJuridica.isChecked() || rbNatural.isChecked()) {
+                int seleccionRadioButton = rbJuridica.isChecked() ? rucJuridica : (rbNatural.isChecked() ? rucNatural : 0);
+                cargarTabla(seleccionRadioButton);
+            } else {
+                showToast("Por favor, seleccione persona Juridíca o Nataural.");
+            }
         }
     }
 
@@ -77,8 +88,17 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
 
-    public void cargarTabla() {
+    public void cargarTabla(int seleccionRadioButton) {
         ArrayList<Empresa> lista = objEmpresa.ListadoGeneral();
+
+        if (seleccionRadioButton == rucJuridica) {
+            // Filtrar por RUC jurídica (20)
+            lista = filtrarEmpresasPorRuc(lista, "20");
+        } else if (seleccionRadioButton == rucNatural) {
+            // Filtrar por RUC natural (10)
+            lista = filtrarEmpresasPorRuc(lista, "10");
+        }
+
         Intent intent = new Intent(this, ListActivity.class);
         intent.putParcelableArrayListExtra("empresas", lista);
         startActivity(intent);
@@ -93,4 +113,16 @@ public class MainActivity extends Activity implements OnClickListener {
         txtRUC.getText().clear();
         txtRazonSocial.requestFocus();
     }
+
+    private ArrayList<Empresa> filtrarEmpresasPorRuc(ArrayList<Empresa> empresas, String rucFiltro) {
+        ArrayList<Empresa> listaFiltrada = new ArrayList<>();
+
+        for (Empresa empresa : empresas) {
+            if (empresa.getRuc().startsWith(rucFiltro)) {
+                listaFiltrada.add(empresa);
+            }
+        }
+        return listaFiltrada;
+    }
+
 }
