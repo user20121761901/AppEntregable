@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="60dp"
-    tools:context=".ListActivity">
+    tools:context=".ListActivity"
+    android:background="@color/clr_bgApp">
 
     <ListView
         android:id="@+id/lvLista"
