@@ -13,6 +13,7 @@ public class EmpresaDAO {
     private MySQLiteHelper dbHelper;
 
     public EmpresaDAO(Context context) {
+
         dbHelper = new MySQLiteHelper(context);
     }
 
@@ -24,13 +25,13 @@ public class EmpresaDAO {
         dbHelper.close();
     }
 
-    public long Insertar(String razonSocial, String ruc){
+    public long Insertar(String razonSocial, String ruc) {
         long estado = 0;
         try {
             ContentValues valores = new ContentValues();
             valores.put("razonSocial", razonSocial);
             valores.put("ruc", ruc);
-            estado = database.insert(MySQLiteHelper.TABLA,null,valores);
+            estado = database.insert(MySQLiteHelper.TABLA, null, valores);
         } catch (Exception e) {
             estado = 0;
         }
@@ -40,22 +41,22 @@ public class EmpresaDAO {
     public long EliminarRegistro(int id) {
         long estado = 0;
         try {
-            estado = database.delete(MySQLiteHelper.TABLA,"id=?", new String[] {String.valueOf(id)});
-        } catch (Exception e){
+            estado = database.delete(MySQLiteHelper.TABLA, "id=?", new String[]{String.valueOf(id)});
+        } catch (Exception e) {
             estado = 0;
         }
         return estado;
     }
 
-    public ArrayList<Empresa>ListadoGeneral(){
+    public ArrayList<Empresa> ListadoGeneral() {
         Cursor c;
         ArrayList<Empresa> listado = new ArrayList<Empresa>();
         c = database.rawQuery("SELECT * FROM empresa ", null);
-        while(c.moveToNext()) {
-            Empresa objEmpresa = new Empresa();
-            objEmpresa.setId(c.getInt(0));
-            objEmpresa.setRuc(c.getString(1));
-            objEmpresa.setRazonSocial(c.getString(2));
+        while (c.moveToNext()) {
+            int id = c.getInt(0);
+            String razonSocial = c.getString(1);
+            String ruc = c.getString(2);
+            Empresa objEmpresa = new Empresa(id, razonSocial, ruc);
             listado.add(objEmpresa);
         }
         c.close();

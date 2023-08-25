@@ -1,6 +1,7 @@
 package com.bastian.androidjavaentregable;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,15 +50,10 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void cargarTabla() {
-        String mensaje = "";
-        try {
-            lista = objEmpresa.ListadoGeneral();
-            for (Empresa obj : lista) {
-                mensaje += obj.getRazonSocial() + " " + obj.getRuc() + "\n";
-            }
-            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-        }
+        lista = objEmpresa.ListadoGeneral();
+        Intent intent = new Intent(this, ListActivity.class);
+        intent.putParcelableArrayListExtra("empresas", lista);
+        startActivity(intent);
     }
 
     @Override
