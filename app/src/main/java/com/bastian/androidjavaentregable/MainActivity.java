@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class MainActivity extends Activity implements OnClickListener {
     private EmpresaDAO objEmpresa;
     EditText txtRazonSocial, txtRUC;
-    ArrayList<Empresa> lista = null;
     Button btnRegistrar, btnListar;
 
     @Override
@@ -22,47 +21,76 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initializeViews();
+        objEmpresa = new EmpresaDAO(this);
+        objEmpresa.open();
+    }
+
+    private void initializeViews() {
         txtRazonSocial = (EditText) findViewById(R.id.etRazonS);
         txtRUC = (EditText) findViewById(R.id.etRuc);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
         btnListar = (Button) findViewById(R.id.btnListar);
         btnRegistrar.setOnClickListener(this);
         btnListar.setOnClickListener(this);
-
-        objEmpresa = new EmpresaDAO(this);
-        objEmpresa.open();
-    }
-
-    public void Grabar() {
-        String razonSocial = txtRazonSocial.getText().toString();
-        String ruc = txtRUC.getText().toString();
-        long i = 0;
-        i = objEmpresa.Insertar(razonSocial, ruc);
-
-        if (i == 0) {
-            Toast.makeText(getApplicationContext(), "Registro No Insertado", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "Registro Insertado", Toast.LENGTH_LONG).show();
-            txtRazonSocial.getText().clear();
-            txtRUC.getText().clear();
-            txtRazonSocial.requestFocus();
-        }
-    }
-
-    public void cargarTabla() {
-        lista = objEmpresa.ListadoGeneral();
-        Intent intent = new Intent(this, ListActivity.class);
-        intent.putParcelableArrayListExtra("empresas", lista);
-        startActivity(intent);
     }
 
     @Override
     public void onClick(View view) {
         if (btnRegistrar == view) {
-            Grabar();
+            grabarEmpresa();
         }
         if (btnListar == view) {
             cargarTabla();
         }
+    }
+
+    public void grabarEmpresa() {
+        String razonSocial = txtRazonSocial.getText().toString();
+        String ruc = txtRUC.getText().toString();
+
+        // Validación: Si los campos están vacíos
+        if (razonSocial.isEmpty() || ruc.isEmpty()) {
+            showToast("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Validación: Si el RUC tiene 11 dígitos
+        if (ruc.length() != 11) {
+            showToast("El RUC debe contener exactamente 11 dígitos.");
+            return;
+        }
+
+        // Validación: Si el RUC no comienza con "20" o "10"
+        if (!ruc.startsWith("20") && !ruc.startsWith("10")) {
+            showToast("El RUC no es válido.");
+            return;
+        }
+
+        long i = 0;
+        i = objEmpresa.Insertar(razonSocial, ruc);
+        if (i == 0) {
+            showToast("Registro No Insertado.");
+        } else {
+            showToast("Registro Insertado.");
+            clearInputFields();
+        }
+    }
+
+    public void cargarTabla() {
+        ArrayList<Empresa> lista = objEmpresa.ListadoGeneral();
+        Intent intent = new Intent(this, ListActivity.class);
+        intent.putParcelableArrayListExtra("empresas", lista);
+        startActivity(intent);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void clearInputFields() {
+        txtRazonSocial.getText().clear();
+        txtRUC.getText().clear();
+        txtRazonSocial.requestFocus();
     }
 }
