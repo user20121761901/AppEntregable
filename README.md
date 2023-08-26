@@ -14,7 +14,7 @@ Para instalar *AppEntregable* abre Git Bash y escribe lo siguiente:
 ```bash
   cd Desktop
   git clone https://github.com/Sbmm30/AppEntregable
-  cd AndroidEntregable
+  cd AppEntregable
 ```
 El proyecto lo encontrarás en tu escritorio 👍✨
 
